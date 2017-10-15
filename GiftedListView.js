@@ -25,6 +25,40 @@ function MergeRowsWithHeaders(obj1, obj2) {
 }
 
 class GiftedListView extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this._setPage(1);
+    this._setRows([]);
+
+    var ds = null;
+
+    if (this.props.withSections === true) {
+      ds = new ListView.DataSource({
+        rowHasChanged: this.props.rowHasChanged
+          ? this.props.rowHasChanged
+          : (row1, row2) => row1 !== row2,
+        sectionHeaderHasChanged: (section1, section2) => section1 !== section2
+      });
+      this.state = {
+        dataSource: ds.cloneWithRowsAndSections(this._getRows()),
+        isRefreshing: false,
+        paginationStatus: "firstLoad"
+      };
+    } else {
+      ds = new ListView.DataSource({
+        rowHasChanged: this.props.rowHasChanged
+          ? this.props.rowHasChanged
+          : (row1, row2) => row1 !== row2
+      });
+      this.state = {
+        dataSource: ds.cloneWithRows(this._getRows()),
+        isRefreshing: false,
+        paginationStatus: "firstLoad"
+      };
+    }
+  }
+
   getDefaultProps() {
     return {
       customStyles: {},
@@ -190,37 +224,6 @@ class GiftedListView extends React.Component {
         ]}
       />
     );
-  }
-
-  getInitialState() {
-    this._setPage(1);
-    this._setRows([]);
-
-    var ds = null;
-    if (this.props.withSections === true) {
-      ds = new ListView.DataSource({
-        rowHasChanged: this.props.rowHasChanged
-          ? this.props.rowHasChanged
-          : (row1, row2) => row1 !== row2,
-        sectionHeaderHasChanged: (section1, section2) => section1 !== section2
-      });
-      return {
-        dataSource: ds.cloneWithRowsAndSections(this._getRows()),
-        isRefreshing: false,
-        paginationStatus: "firstLoad"
-      };
-    } else {
-      ds = new ListView.DataSource({
-        rowHasChanged: this.props.rowHasChanged
-          ? this.props.rowHasChanged
-          : (row1, row2) => row1 !== row2
-      });
-      return {
-        dataSource: ds.cloneWithRows(this._getRows()),
-        isRefreshing: false,
-        paginationStatus: "firstLoad"
-      };
-    }
   }
 
   componentDidMount() {
