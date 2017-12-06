@@ -178,12 +178,12 @@ class GiftedListView extends React.Component {
       </TouchableHighlight>
     );
   }
-  headerView() {
+  headerView() => {
     if (this.state.paginationStatus === "firstLoad" || !this.props.headerView) {
       return null;
     }
     return this.props.headerView();
-  }
+  };
   emptyView(refreshCallback) {
     if (this.props.emptyView) {
       return this.props.emptyView(refreshCallback);
@@ -211,7 +211,7 @@ class GiftedListView extends React.Component {
       </View>
     );
   }
-  renderSeparator() {
+  renderSeparator = () => {
     if (this.props.renderSeparator) {
       return this.props.renderSeparator();
     }
@@ -224,7 +224,7 @@ class GiftedListView extends React.Component {
         ]}
       />
     );
-  }
+  };
 
   componentDidMount() {
     this._mounted = true;
@@ -323,7 +323,7 @@ class GiftedListView extends React.Component {
     }
   }
 
-  _renderPaginationView() {
+  _renderPaginationView = () => {
     if (
       (this.state.paginationStatus === "fetching" &&
         this.props.pagination === true) ||
@@ -347,7 +347,7 @@ class GiftedListView extends React.Component {
     } else {
       return null;
     }
-  }
+  };
 
   renderRefreshControl() {
     if (this.props.renderRefreshControl) {
