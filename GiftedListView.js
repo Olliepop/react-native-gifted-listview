@@ -59,8 +59,7 @@ class GiftedListView extends React.Component {
     }
   }
 
-  getDefaultProps() {
-    return {
+  static defaultProps = {
       customStyles: {},
       initialListSize: 10,
       firstLoader: true,
@@ -91,8 +90,7 @@ class GiftedListView extends React.Component {
 
       spinnerSize: "small",
       spinnerColor: "gray"
-    };
-  }
+  };
 
   _setPage(page) {
     this._page = page;
