@@ -250,11 +250,11 @@ class GiftedListView extends React.Component {
     this.refs.listview.setNativeProps(props);
   }
 
-  _refresh() {
+  _refresh = () => {
     this._onRefresh({ external: true });
-  }
+  };
 
-  _onRefresh(options = {}) {
+  _onRefresh = (options = {}) => {
     if (this._mounted) {
       this.setState({
         isRefreshing: true
@@ -262,13 +262,13 @@ class GiftedListView extends React.Component {
       this._setPage(1);
       this.props.onFetch(this._getPage(), this._postRefresh, options);
     }
-  }
+  };
 
-  _postRefresh(rows = [], options = {}) {
+  _postRefresh = (rows = [], options = {}) => {
     if (this._mounted) {
       this._updateRows(rows, options);
     }
-  }
+  };
 
   _onPaginate() {
     if (this.state.paginationStatus === "allLoaded") {
