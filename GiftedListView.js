@@ -176,7 +176,7 @@ class GiftedListView extends React.Component {
       </TouchableHighlight>
     );
   }
-  headerView() => {
+  headerView = () => {
     if (this.state.paginationStatus === "firstLoad" || !this.props.headerView) {
       return null;
     }
